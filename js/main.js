@@ -9,6 +9,15 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function createIdGenerator () {
+  let lastGeneratedId = 0;
+
+  return function () {
+    lastGeneratedId += 1;
+    return Number(lastGeneratedId);
+  };
+}
+
 function calcStringLength(string, maxLength) {
   if (string.length >= +maxLength) {
     return false;
@@ -17,4 +26,18 @@ function calcStringLength(string, maxLength) {
 }
 
 calcStringLength('sdhjfdshffsdjfkhdskfhsdjfkskd', 20);
-getRandomNumber(20, 0);
+
+const orderedId = createIdGenerator();
+const orderedUrl = createIdGenerator();
+
+const createDescription = () => ({
+  id: orderedId(),
+  url: `photos/${orderedUrl()}.jpg`,
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  likes: getRandomNumber(15, 200),
+  comments: getRandomNumber(0, 200),
+});
+
+
+const createPhotoDescriptions = Array.from({length: 25}, createDescription);
+createPhotoDescriptions();
