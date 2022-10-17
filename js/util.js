@@ -25,7 +25,10 @@ const calcStringLength = (string, maxLength) => {
   return true;
 };
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 calcStringLength('sdhjfdshffsdjfkhdskfhsdjfkskd', 20);
 
 export {getRandomNumber};
 export {createIdGenerator};
+export {isEscapeKey};
