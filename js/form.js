@@ -1,5 +1,4 @@
 const uploadForm = document.querySelector('#upload-select-image');
-// const pristine = new Pristine(uploadForm);
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__form--element',
   errorTextParent: 'img-upload__form--element',
