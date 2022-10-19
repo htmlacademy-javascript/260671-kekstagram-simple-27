@@ -2,25 +2,23 @@ const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const imageContainer = document.querySelector('.img-upload__preview');
-let imageScaleValue = parseInt(scaleValue.value);
 
-const fn = () => {
-  scaleValue.value = `${imageScaleValue}%`;
-  const scalePercent = imageScaleValue / 100;
-  imageContainer.style.transform = `scale(${scalePercent})`;
+const setScale = (scale) => {
+  scaleValue.value = `${scale}%`;
+  imageContainer.style.transform = `scale(${scale / 100})`;
 };
 
 biggerButton.addEventListener('click', () => {
-  if (imageScaleValue < 100 && imageScaleValue >= 25) {
-    imageScaleValue += 25;
-    fn();
+  const scale = parseInt(scaleValue.value);
+  if (scale < 100 && scale >= 25) {
+    setScale(scale + 25);
   }
 });
 
 smallerButton.addEventListener('click', () => {
-  if (imageScaleValue <= 100 && imageScaleValue > 25) {
-    imageScaleValue -= 25;
-    fn();
+  const scale = parseInt(scaleValue.value);
+  if (scale <= 100 && scale > 25) {
+    setScale(scale - 25);
   }
 });
 
