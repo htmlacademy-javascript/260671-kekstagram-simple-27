@@ -18,10 +18,14 @@ noUiSlider.create(sliderElement, {
   step: 2,
   connect: 'lower',
 });
+
+const updateValue = (val) => {
+  valueElement.value = val;
+  sliderElement.noUiSlider.set(val);
+};
+
 //При измененмм значения слайдера обновляем значение в инпуте
-sliderElement.noUiSlider.on('update', (evt) => {
-  valueElement.value = sliderElement.noUiSlider.get();
-});
+
 //При смене фильтра обновляем максимальное и минимальное значения и шаг слайдера. Генерируем стиль фильтра
 function onFilterChange (evt) {
   if (evt.target.value === 'none') {
@@ -39,9 +43,16 @@ function onFilterChange (evt) {
         start: +evt.target.dataset.startValue,
         step: +evt.target.dataset.step
       });
+      sliderElement.noUiSlider.on('update', () => {
+        valueElement.value = sliderElement.noUiSlider.get();
+        imageCore.style.filter = 'none';
+        setTimeout(() => {
+          imageCore.style.filter = `${evt.target.dataset.styleName}(${valueElement.value}${evt.target.dataset.styleSuffix})`;
+        },0);
+      });
       setTimeout(() => {
         imageCore.style.filter = `${evt.target.dataset.styleName}(${valueElement.value}${evt.target.dataset.styleSuffix})`;
-      },10);
+      },0);
     }
   }
 }
