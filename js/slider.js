@@ -1,9 +1,6 @@
 const sliderFieldset = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
-const radioList = document.querySelector('.effects__list');
-const radioButtons = radioList.querySelectorAll('input[type="radio"]');
-const effectsList = document.querySelector('.img-upload__effects');
 const imageContainer = document.querySelector('.img-upload__preview');
 const imageCore = imageContainer.querySelector('img');
 
@@ -19,14 +16,6 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-const updateValue = (val) => {
-  valueElement.value = val;
-  sliderElement.noUiSlider.set(val);
-};
-
-//При измененмм значения слайдера обновляем значение в инпуте
-
-//При смене фильтра обновляем максимальное и минимальное значения и шаг слайдера. Генерируем стиль фильтра
 function onFilterChange (evt) {
   if (evt.target.value === 'none') {
     sliderFieldset.style.display = 'none';
