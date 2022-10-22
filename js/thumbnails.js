@@ -1,21 +1,23 @@
-import {createDescription} from './data.js';
-const createPhotoDescriptions = () => Array.from({length: 25}, createDescription);
-
 const userPicturesContainer = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture ')
   .content
   .querySelector('.picture');
 
-const userPictures = createPhotoDescriptions();
-
 const picturesFragment = document.createDocumentFragment();
 
-userPictures.forEach(({url, likes, comments}) => {
-  const pictureElement = userPictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__comments').textContent = comments;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  picturesFragment.appendChild(pictureElement);
-});
+const createUserPictures = (pictures) => {
+  pictures.forEach(({url, likes, comments}) => {
+    const pictureElement = userPictureTemplate.cloneNode(true);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__comments').textContent = comments;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    picturesFragment.appendChild(pictureElement);
+  });
+  userPicturesContainer.appendChild(picturesFragment);
+};
 
-userPicturesContainer.appendChild(picturesFragment);
+fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+  .then((response) => response.json())
+  .then((array) => {
+    createUserPictures(array);
+  });
