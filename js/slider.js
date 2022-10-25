@@ -5,7 +5,7 @@ const imageContainer = document.querySelector('.img-upload__preview');
 const imageCore = imageContainer.querySelector('img');
 
 valueElement.value = 0;
-//Создание слайдера
+
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,

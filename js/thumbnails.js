@@ -1,3 +1,4 @@
+import {userPhotosLoadError} from './util.js';
 const userPicturesContainer = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture ')
   .content
@@ -17,7 +18,16 @@ const createUserPictures = (pictures) => {
 };
 
 fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
-  .then((response) => response.json())
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      userPhotosLoadError();
+    }
+  })
   .then((array) => {
     createUserPictures(array);
+  })
+  .catch(() => {
+    userPhotosLoadError();
   });

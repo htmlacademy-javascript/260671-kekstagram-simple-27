@@ -5,8 +5,6 @@ const scaleValue = document.querySelector('.scale__control--value');
 const imageContainer = document.querySelector('.img-upload__preview');
 const effectsList = document.querySelector('.img-upload__effects');
 
-//Изменение масштаба изображения
-
 const setScale = (scale) => {
   scaleValue.value = `${scale}%`;
   imageContainer.style.transform = `scale(${scale / 100})`;
@@ -25,7 +23,5 @@ smallerButton.addEventListener('click', () => {
     setScale(scale - 25);
   }
 });
-
-//Наложение фильтров
 
 effectsList.addEventListener('change', onFilterChange);
