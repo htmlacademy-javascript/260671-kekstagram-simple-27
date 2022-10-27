@@ -41,3 +41,5 @@ fileInput.addEventListener('change', ()=> {
 closeOverlayButton.addEventListener('click', ()=> {
   closeUploadOverlay();
 });
+
+export {closeUploadOverlay};

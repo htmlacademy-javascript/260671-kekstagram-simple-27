@@ -1,5 +1,7 @@
 import './thumbnails.js';
-import './form.js';
-import './overlay.js';
+import {setUploadFormSubmit} from './form.js';
+import {closeUploadOverlay} from './overlay.js';
 import './image-editor.js';
 import './slider.js';
+
+setUploadFormSubmit(closeUploadOverlay);
