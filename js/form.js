@@ -4,6 +4,7 @@ const submitButton = document.querySelector('#upload-submit');
 const body = document.querySelector('body');
 const uploadSuccessTemplate = document.querySelector('#success').content;
 const uploadErrorTemplate = document.querySelector('#error').content;
+const SERVER_ADDRESS_SEND = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__form--element',
@@ -36,21 +37,18 @@ const showUploadSuccess = () => {
   };
 
   const missClickSuccessClose = (node) => {
-    const closeMessage = () => {
-      successModal.remove();
-    };
-
-    const testFunction = (element) => {
+    const closeSuccessMessage = (element) => {
       const target = element.target;
       const itsMessage = target === node || node.contains(target);
 
       if (!itsMessage) {
-        closeMessage();
+        successModal.remove();
         document.removeEventListener('keydown', onSuccessModalEscKeydown);
+        document.removeEventListener('click', closeSuccessMessage);
       }
     };
 
-    document.addEventListener('click', testFunction);
+    document.addEventListener('click', closeSuccessMessage);
   };
 
   missClickSuccessClose(successInner);
@@ -78,20 +76,19 @@ const showUploadError = () => {
   };
 
   const missClickErrorClose = (node) => {
-    const closeMessage = () => {
-      errorModal.remove();
-    };
 
-    const tesrErrFunction = (element) => {
+    const closeErrorMessage = (element) => {
       const target = element.target;
       const itsMessage = target === node || node.contains(target);
 
       if (!itsMessage) {
-        closeMessage();
+        errorModal.remove();
+        document.removeEventListener('keydown', onErrorModalEscKeydown);
+        document.removeEventListener('click', closeErrorMessage);
       }
     };
 
-    document.addEventListener('click', tesrErrFunction);
+    document.addEventListener('click', closeErrorMessage);
   };
 
   missClickErrorClose(errorInner);
@@ -113,7 +110,7 @@ const setUploadFormSubmit = (onSuccess) => {
       blockSubmitButton();
 
       fetch(
-        'https://27.javascript.pages.academy/kekstagram-simple',
+        SERVER_ADDRESS_SEND,
         {
           method: 'POST',
           body: formData,
@@ -123,9 +120,9 @@ const setUploadFormSubmit = (onSuccess) => {
           if (response.ok) {
             onSuccess();
             showUploadSuccess();
-          } else {
-            showUploadError();
+            return;
           }
+          showUploadError();
         })
         .catch(() => {
           showUploadError();
