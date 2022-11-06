@@ -16,32 +16,6 @@ noUiSlider.create(sliderElement, {
   connect: 'lower',
 });
 
-// function onFilterChange (evt) {
-//   if (evt.target.value === 'none') {
-//     sliderFieldset.style.display = 'none';
-//     imageCore.style.filter = 'none';
-//   } else {
-//     sliderFieldset.style.display = 'block';
-//     if (evt.target.matches('input[type="radio"]')) {
-//       imageCore.style.filter = 'none';
-//       sliderElement.noUiSlider.updateOptions({
-//         range: {
-//           min: +evt.target.dataset.minValue,
-//           max: +evt.target.dataset.maxValue
-//         },
-//         start: +evt.target.dataset.startValue,
-//         step: +evt.target.dataset.step
-//       });
-//       sliderElement.noUiSlider.on('update', () => {
-//         valueElement.value = sliderElement.noUiSlider.get();
-//         imageCore.style.filter = 'none';
-//         imageCore.style.filter = `${evt.target.dataset.styleName}(${valueElement.value}${evt.target.dataset.styleSuffix})`;
-//       });
-//       imageCore.style.filter = `${evt.target.dataset.styleName}(${valueElement.value}${evt.target.dataset.styleSuffix})`;
-//     }
-//   }
-// }
-
 function onFilterChange (evt) {
   if (evt.target.value === 'none') {
     sliderFieldset.style.display = 'none';
@@ -49,7 +23,6 @@ function onFilterChange (evt) {
   } else {
     sliderFieldset.style.display = 'block';
     if (evt.target.matches('input[type="radio"]')) {
-      imageCore.style.filter = 'none';
       sliderElement.noUiSlider.updateOptions({
         range: {
           min: +evt.target.dataset.minValue,
@@ -60,14 +33,8 @@ function onFilterChange (evt) {
       });
       sliderElement.noUiSlider.on('update', () => {
         valueElement.value = sliderElement.noUiSlider.get();
-        imageCore.style.filter = 'none';
-        setTimeout(() => {
-          imageCore.style.filter = `${evt.target.dataset.styleName}(${valueElement.value}${evt.target.dataset.styleSuffix})`;
-        },0);
-      });
-      setTimeout(() => {
         imageCore.style.filter = `${evt.target.dataset.styleName}(${valueElement.value}${evt.target.dataset.styleSuffix})`;
-      },0);
+      });
     }
   }
 }

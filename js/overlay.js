@@ -43,3 +43,4 @@ closeOverlayButton.addEventListener('click', ()=> {
 });
 
 export {closeUploadOverlay};
+export {onOverlayEscKeydown};

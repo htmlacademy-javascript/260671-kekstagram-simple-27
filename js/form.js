@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { onOverlayEscKeydown } from './overlay.js';
 const uploadForm = document.querySelector('#upload-select-image');
 const submitButton = document.querySelector('#upload-submit');
 const body = document.querySelector('body');
@@ -61,6 +62,7 @@ const showUploadSuccess = () => {
 };
 
 const showUploadError = () => {
+  document.removeEventListener('keydown', onOverlayEscKeydown); //тест
   const errorElement = uploadErrorTemplate.cloneNode(true);
   body.appendChild(errorElement);
   const closeErrorButton = document.querySelector('.error__button');
@@ -72,6 +74,7 @@ const showUploadError = () => {
       evt.preventDefault();
       errorModal.remove();
       document.removeEventListener('keydown', onErrorModalEscKeydown);
+      document.addEventListener('keydown', onOverlayEscKeydown); //тест
     }
   };
 
