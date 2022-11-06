@@ -3,7 +3,7 @@ const userPicturesContainer = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture ')
   .content
   .querySelector('.picture');
-
+const SERVER_ADDRESS_GET = 'https://27.javascript.pages.academy/kekstagram-simple/data';
 const picturesFragment = document.createDocumentFragment();
 
 const createUserPictures = (pictures) => {
@@ -17,13 +17,12 @@ const createUserPictures = (pictures) => {
   userPicturesContainer.appendChild(picturesFragment);
 };
 
-fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+fetch(SERVER_ADDRESS_GET)
   .then((response) => {
     if (response.ok) {
       return response.json();
-    } else {
-      userPhotosLoadError();
     }
+    userPhotosLoadError();
   })
   .then((array) => {
     createUserPictures(array);

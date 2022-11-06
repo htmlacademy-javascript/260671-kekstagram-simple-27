@@ -29,7 +29,7 @@ function closeUploadOverlay() {
   fileInput.value = '';
   commentField.value = '';
   scaleValue.value = '100%';
-  imageContainer.style.transform = 'scale(1)';
+  imageCore.style.transform = 'scale(1)';
   imageCore.style.filter = 'none';
   sliderFieldset.style.display = 'none';
 }
@@ -43,3 +43,4 @@ closeOverlayButton.addEventListener('click', ()=> {
 });
 
 export {closeUploadOverlay};
+export {onOverlayEscKeydown};

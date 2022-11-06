@@ -3,11 +3,12 @@ const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const imageContainer = document.querySelector('.img-upload__preview');
-const effectsList = document.querySelector('.img-upload__effects');
+const imageCore = imageContainer.querySelector('img');
+const effectsList = document.querySelector('.effects__list');
 
 const setScale = (scale) => {
   scaleValue.value = `${scale}%`;
-  imageContainer.style.transform = `scale(${scale / 100})`;
+  imageCore.style.transform = `scale(${scale / 100})`;
 };
 
 biggerButton.addEventListener('click', () => {
